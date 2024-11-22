@@ -17,7 +17,7 @@ app.post('/', async (req, res) => {
   const user = users.find((user) => user.username === username);
   if (user && (await bcrypt.compare(password, user.password))) {
     req.session.user = user;
-    res.send('Inicio de sesión exitoso');
+    res.redirect('/home');  // Redirige a la ruta /home
   } else {
     res.send('Credenciales incorrectas');
   }
@@ -30,5 +30,7 @@ app.post('/register', async (req, res) => {
   users.push({ username: req.body.username, password: hashedPassword });
   res.send('Registro exitoso');
 });
+
+app.get('/home', (req, res) => res.sendFile(__dirname + '/HTML/home.html'));
 
 app.listen(3000, () => console.log('Servidor en http://localhost:3000'));

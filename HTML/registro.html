@@ -1,5 +1,97 @@
-<form action="/register" method="post">
-    <label>Username:</label><input type="text" name="username"><br>
-    <label>Password:</label><input type="password" name="password"><br>
-    <button type="submit">Registrarse</button>
-</form>
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario de Login</title>
+    <style>
+        /* Aplicando estilo al body para usar toda la altura y centrar el contenido */
+        body,
+        html {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Arial', sans-serif;
+            background-color: #f2f2f2;
+            /* Fondo suave */
+        }
+
+        /* Contenedor del formulario */
+        .form-container {
+            background-color: #ffffff;
+            /* Fondo blanco */
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            text-align: center;
+        }
+
+        /* Estilo para los inputs */
+        input[type="text"],
+        input[type="password"] {
+            padding: 10px;
+            margin: 10px 0;
+            width: 100%;
+            /* Hace que los inputs ocupen todo el ancho disponible */
+            border-radius: 4px;
+            border: 1px solid #ccc;
+            font-size: 16px;
+        }
+
+        /* Estilo para los botones */
+        button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            /* Botón verde */
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 10px 5px;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #45a049;
+            /* Efecto hover para el botón */
+        }
+
+        /* Estilo para el enlace de registrarse */
+        a {
+            text-decoration: none;
+        }
+
+        a button {
+            background-color: #007BFF;
+            /* Botón azul para el enlace de registro */
+        }
+
+        a button:hover {
+            background-color: #0056b3;
+            /* Efecto hover para el botón azul */
+        }
+
+        /* Estilo para el texto de los labels */
+        label {
+            font-weight: bold;
+            margin-bottom: 5px;
+            display: block;
+            text-align: left;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="form-container">
+        <form action="/register" method="post">
+            <label>Username:</label><input type="text" name="username"><br>
+            <label>Password:</label><input type="password" name="password"><br>
+            <button type="submit">Registrarse</button>
+        </form>
+    </div>
+</body>
