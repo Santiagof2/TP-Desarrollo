@@ -33,4 +33,45 @@ app.post('/register', async (req, res) => {
 
 app.get('/home', (req, res) => res.sendFile(__dirname + '/HTML/home.html'));
 
+const passport = require('passport');
+const GoogleStrategy = require('passport-google-oauth20').Strategy;
+passport.use(new GoogleStrategy({
+ clientID: "TU_CLIENT_ID_DE_GOOGLE",
+ clientSecret: "TU_CLIENT_SECRET_DE_GOOGLE",
+ callbackURL: "/auth/google/callback"
+}, (accessToken, refreshToken, profile, done) => {
+ return done(null, profile);
+}));
+app.use(passport.initialize());
+app.get('/auth/google', passport.authenticate('google', { scope: 
+['profile', 'email'] }));
+app.get('/auth/google/callback', passport.authenticate('google', 
+{
+ successRedirect: '/',
+ failureRedirect: '/login'
+}));
+
+
+const speakeasy = require('speakeasy');
+// Generar secreto MFA para un nuevo usuario
+const secret = speakeasy.generateSecret({
+  name: "HelloWorldApp"
+});
+console.log("Secret:", secret.base32); // Escanea este código con Google Authenticator
+// Ruta para verificar MFA
+app.post('/verify-mfa', (req, res) => {
+  const { token } = req.body;
+  const isVerified = speakeasy.totp.verify({
+    secret:
+      secret.base32, encoding: 'base32', token
+  });
+  console.log("Secret:", secret.base32);
+  if (isVerified) {
+    res.send('MFA verificado');
+  } else {
+    res.send('MFA no válido');
+  }
+});
+
+
 app.listen(3000, () => console.log('Servidor en http://localhost:3000'));
