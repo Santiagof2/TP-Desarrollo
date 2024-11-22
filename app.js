@@ -11,8 +11,8 @@ app.use(session({ secret: 'claveSecreta', resave: false, saveUninitialized: true
 let users = [];
 
 // Ruta de inicio de sesión
-app.get('/login', (req, res) => res.sendFile(__dirname + '/HTML/login.html'));
-app.post('/login', async (req, res) => {
+app.get('/', (req, res) => res.sendFile(__dirname + '/HTML/login.html'));
+app.post('/', async (req, res) => {
   const { username, password } = req.body;
   const user = users.find((user) => user.username === username);
   if (user && (await bcrypt.compare(password, user.password))) {
@@ -24,7 +24,7 @@ app.post('/login', async (req, res) => {
 });
 
 // Ruta de registro
-app.get('/register', (req, res) => res.sendFile(__dirname + '/HTML/register.html'));
+app.get('/register', (req, res) => res.sendFile(__dirname + '/HTML/registro.html'));
 app.post('/register', async (req, res) => {
   const hashedPassword = await bcrypt.hash(req.body.password, 10);
   users.push({ username: req.body.username, password: hashedPassword });
